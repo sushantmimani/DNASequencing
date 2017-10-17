@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+}
+textarea {
+  margin-bottom: 10px;
+}
+
+body {
+  background-color: #F4F4F4;
+  padding-top: 70px;
+  height: 100%;
+
+}
+
+#output-console{
+  overflow-x: hidden;
+  word-wrap: normal;
+}
+
+h1 {
+  text-align: center;
+  font-family: monospace;
+}
+
+.full-height {
+  height: 99%;
+}
+
+.vertical-line{
+  border-right: solid 1px black;
+}
+
+.output-console {
+  background-color: white;
+  font-family: monospace;
+  overflow: scroll;
+  width: auto;
+  height: 99%;
+  padding: 5px;
+  border: 1px solid gray;
+}
+
+#clear {
+  position: absolute;
+  top: 28px;
+  right: 19px;
+}

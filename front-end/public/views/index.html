@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between fixed-top">
+<a class="navbar-brand" href="#">Autodesk Technical Challenge</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+</nav>
+<div class="container-fluid full-height">
+  <div class="row full-height">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 vertical-line">
+
+      <label for="dna">DNA Sequence</label>
+
+      <textarea id="dna"
+                ng-model="model.dna"
+                rows="5"
+                class="form-control"
+                placeholder="Enter DNA sequence here">DNA sequence</textarea>
+
+        <a ng-click="model.searchDNA()"
+           class="btn btn-block btn-info">Search</a>
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      Execution Summary:<button class="btn btn-sm" id="clear" ng-click="model.clearConsole()">Clear</button>
+      <div class="output-console" ng-bind-html="model.message" id="output-console"></div>
+    </div>
+  </div>
+</div> <!--container fluid ends-->
