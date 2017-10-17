@@ -13,7 +13,10 @@
 
 
       function searchDNA(dna) {
-          return $http.get('http://127.0.0.1:5000')
+          var data = {
+              dna:dna
+          }
+          return $http.post('http://127.0.0.1:5000',data)
               .then(function (response) {
                   return response;
               })

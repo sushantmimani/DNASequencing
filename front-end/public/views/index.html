@@ -19,9 +19,21 @@
         <a ng-click="model.searchDNA()"
            class="btn btn-block btn-info">Search</a>
 
+
+        <h2><label style="margin-top: 20px">Previous executions:</label></h2>
+        <div id="prev"
+             ng-bind-html="model.prev"
+             contenteditable="false"
+             style="margin-top: -25px"
+             ng-model="model.prev">
+        </div>
+
+        <a ng-click="model.clearHistory()"
+           class="btn btn-block btn-danger" style="margin-top: 30px">Clear History</a>
+
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-      Execution Summary:<button class="btn btn-sm" id="clear" ng-click="model.clearConsole()">Clear</button>
+      Current Execution Summary:<button class="btn btn-sm" id="clear" ng-click="model.clearConsole()">Clear</button>
       <div class="output-console" ng-bind-html="model.message" id="output-console"></div>
     </div>
   </div>
