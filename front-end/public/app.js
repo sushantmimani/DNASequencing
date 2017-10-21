@@ -3,7 +3,7 @@
 (function(){
   angular
       .module('aD_technical_challenge',['ngRoute','ngSanitize','ngStorage'])
-      .directive('capitalize', function() {
+      .directive('capitalize', function() {  // Directive to capitalize the input
     return {
         require: 'ngModel',
         link: function(scope, element, attrs, modelCtrl) {

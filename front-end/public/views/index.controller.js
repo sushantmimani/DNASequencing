@@ -22,15 +22,12 @@
           model.prev = "";
       }
       function init() {
-          // delete $localStorage.result;
           if($localStorage.result) {
-
             model.DNAList=$localStorage.result;
             for(let index in $localStorage.result)
               model.prev+= "<br/>"+index+":"+$localStorage.result[index];
           }
 
-          console.log(model.DNAList)
       }
       init();
       function searchDNA() {
@@ -43,19 +40,15 @@
                       model.message+= "<br/>"+temp+":Not found";
                       model.DNAList[temp]="Unavailable";
                       msg[temp]="Unavailable";
-                      console.log(JSON.stringify(msg));
 
                   } else {
                       model.message+= "<br/>"+temp+":"+JSON.stringify(response.data);
                       model.DNAList[temp]=JSON.stringify(response.data);
                       msg[temp]=response.data;
-                      console.log(JSON.stringify(msg));
                   }
                   $localStorage.result = model.DNAList;
               })
-          console.log("Starting")
           msg[model.dna]="Searching";
-          console.log(JSON.stringify(msg))
           model.dna="";
 
       }
