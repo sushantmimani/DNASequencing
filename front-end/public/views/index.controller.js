@@ -13,29 +13,28 @@
 
 
         function init() {
-
             if ($localStorage.current){
                 for(let index in $localStorage.current)
                     searchDNA(index)
-            }
-            else{
+            } else{
                 $localStorage.current={}
             }
+
             if ($localStorage.result) {
                 for (let index in $localStorage.result)
                     model.prev += "<br/>" + index + ":" + $localStorage.result[index];
-            }
-            else {
+            } else {
                 $localStorage.result = {};
             }
-        console.log($localStorage)
+            console.log($localStorage);
         }
 
         init();
 
         function searchDNA(dna) {
-            if(dna ===""){
-                alert("Please enter a value");
+
+            if(dna ==="" || dna===undefined || !isNaN(dna)){
+                alert("Please enter a valid value");
                 return;
             }
             let id = uuid.v1();
@@ -44,12 +43,7 @@
             Create a new para element for each search in the current execution dialog. Creating an element this way
             makes it easier to update the value once the promise returns
              */
-            var para = document.createElement("p");
-            para.setAttribute('class', id);
-            var node = document.createTextNode(dna + ": Searching");
-            para.appendChild(node);
-            var element = document.getElementById("output-console-current");
-            element.append(para);
+           generateHTMLElement(id, dna);
 
             /*
             Function call to initiate the search
@@ -83,9 +77,18 @@
         }
 
 
-
         function clearConsole() {
             document.getElementById("output-console-current").innerHTML = "";
+        }
+
+
+        function generateHTMLElement(id, dna) {
+            let para = document.createElement("p");
+            para.setAttribute('class', id);
+            let node = document.createTextNode(dna + ": Searching");
+            para.appendChild(node);
+            let element = document.getElementById("output-console-current");
+            element.append(para);
         }
 
 
