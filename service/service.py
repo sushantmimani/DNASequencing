@@ -12,25 +12,25 @@ import random
 app = Flask(__name__)
 CORS(app)
 
+# Tell NCBI who you are
+Entrez.email = "mimani.s@husky.neu.edu"
 
-@app.route('/', methods=['POST'])
-def search_protein():
-    dna = request.json['dna']
-    response = {}
+# Add ACCESSION Id to this list for all lists that you want to check
+protein_list = ['NC_000852', 'NC_007346', 'NC_008724', 'NC_009899', 'NC_014637', 'NC_020104', 'NC_023423',
+                'NC_023640', 'NC_023719', 'NC_027867']
 
-    # Tell NCBI who you are
-    Entrez.email = "mimani.s@husky.neu.edu"
 
-    # Add ACCESSION Id to this list for all lists that you want to check
-    protein_list = ['NC_000852', 'NC_007346', 'NC_008724', 'NC_009899', 'NC_014637', 'NC_020104', 'NC_023423',
-                    'NC_023640', 'NC_023719', 'NC_027867']
-
-    # Shuffle the list for random searches
-
+# Shuffle the list for random searches
+def shuffle_protein():
     random.shuffle(protein_list)
+
+
+def find_protein(dna):
+    shuffle_protein()
+    response = {}
     for protein in protein_list:
         # If the FASTA file is not available, download the file for future use
-        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lists/"+protein)
+        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lists/" + protein)
         if not os.path.isfile(filename):
             net_handle = Entrez.efetch(db="protein", id=protein, rettype="fasta", retmode="text")
             out_handle = open(filename, "w+")
@@ -50,7 +50,13 @@ def search_protein():
                 response["list"] = "Unavailable"
                 response["organism"] = "Unavailable"
             f.close()
+    return response
 
+
+@app.route('/', methods=['POST'])
+def search_protein():
+    dna = request.json['dna']
+    response = find_protein(dna)
     js = json.dumps(response)
     resp = Response(js, status=200, mimetype='application/json')  # Return the data
     return resp
