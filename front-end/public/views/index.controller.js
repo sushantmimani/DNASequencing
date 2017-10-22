@@ -5,10 +5,9 @@
         .module('aD_technical_challenge')
         .controller('IndexController', IndexController);
 
-    function IndexController(IndexService, $localStorage, uuid, $scope) {
+    function IndexController(IndexService, $localStorage, uuid) {
         let model = this;
         model.dna = "";
-        model.DNAList = {};
         model.message = "DNA Sequencing <br/>";
         model.prev = "";
         model.searchDNA = searchDNA;
@@ -19,15 +18,20 @@
         function clearHistory() {
            $localStorage.$reset();
             model.prev = "";
-            model.DNAList = {}
+            $localStorage.result = {}
+
         }
 
         function init() {
             if ($localStorage.result) {
-                model.DNAList = $localStorage.result;
                 for (let index in $localStorage.result)
                     model.prev += "<br/>" + index + ":" + $localStorage.result[index];
             }
+            else {
+                $localStorage.result = {};
+            }
+
+            console.log($localStorage.result)
 
         }
 
@@ -55,7 +59,8 @@
                     if (response.data.list === "Unavailable") {
                         document.getElementById("output-console-current").getElementsByClassName(id)[0].innerHTML = temp
                             + ": Not found";
-                        model.DNAList[temp] = "Not found";
+                        $localStorage.result[temp] = "Not found";
+                        console.log($localStorage)
 
                     } else {
                         document.getElementById("output-console-current").getElementsByClassName(id)[0].innerHTML = temp
@@ -64,16 +69,15 @@
                         If the sequence was previously found in some other protein, append the new protein to the
                         existing list
                          */
-                        if (model.DNAList.hasOwnProperty(temp)) {
-                            if (!model.DNAList[temp].includes(JSON.stringify(response.data)))
-                                model.DNAList[temp] = model.DNAList[temp] + "," + JSON.stringify(response.data);
+                        if ($localStorage.result.hasOwnProperty(temp)) {
+                            if (!$localStorage.result[temp].includes(JSON.stringify(response.data)))
+                                $localStorage.result[temp] = $localStorage.result[temp] + "," + JSON.stringify(response.data);
 
                         }
                         else {
-                            model.DNAList[temp] = JSON.stringify(response.data);
+                            $localStorage.result[temp] = JSON.stringify(response.data);
                         }
                     }
-                    $localStorage.result = model.DNAList;
                 })
             model.dna = "";
 
