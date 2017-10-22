@@ -30,7 +30,7 @@ def search_protein():
     random.shuffle(protein_list)
     for protein in protein_list:
         # If the FASTA file is not available, download the file for future use
-        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)),"lists/"+protein)
+        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lists/"+protein)
         if not os.path.isfile(filename):
             net_handle = Entrez.efetch(db="protein", id=protein, rettype="fasta", retmode="text")
             out_handle = open(filename, "w+")
