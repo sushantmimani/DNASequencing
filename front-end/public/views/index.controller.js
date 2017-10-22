@@ -8,7 +8,6 @@
     function IndexController(IndexService, $localStorage, uuid) {
         let model = this;
         model.dna = "";
-        model.message = "DNA Sequencing <br/>";
         model.prev = "";
         model.searchDNA = searchDNA;
         model.clearHistory = clearHistory;
@@ -84,7 +83,7 @@
         }
 
         function clearConsole() {
-            model.message = "DNA Sequencing";
+            document.getElementById("output-console-current").innerHTML = "";
         }
 
 
