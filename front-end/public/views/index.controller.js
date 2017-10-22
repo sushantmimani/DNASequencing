@@ -33,22 +33,29 @@
       function searchDNA() {
           let temp = model.dna;
           model.message+= "<br/>"+temp+":Searching";
-
           IndexService.searchDNA(model.dna)
               .then(function (response) {
                   if(response.data.list==="Unavailable"){
                       model.message+= "<br/>"+temp+":Not found";
                       model.DNAList[temp]="Unavailable";
-                      msg[temp]="Unavailable";
 
                   } else {
                       model.message+= "<br/>"+temp+":"+JSON.stringify(response.data);
-                      model.DNAList[temp]=JSON.stringify(response.data);
-                      msg[temp]=response.data;
+                      /*
+                      If the sequence was previously found in some other protein, append the new protein to the
+                      existing list
+                       */
+                      if(model.DNAList.hasOwnProperty(temp)){
+                          if(!model.DNAList[temp].includes(JSON.stringify(response.data)))
+                              model.DNAList[temp]= model.DNAList[temp] +","+ JSON.stringify(response.data);
+
+                      }
+                      else{
+                          model.DNAList[temp]=JSON.stringify(response.data);
+                      }
                   }
                   $localStorage.result = model.DNAList;
               })
-          msg[model.dna]="Searching";
           model.dna="";
 
       }
