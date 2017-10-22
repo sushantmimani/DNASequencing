@@ -5,12 +5,15 @@ from flask_cors import CORS
 from flask import request
 from flask import Response
 from Bio import Entrez
+from gevent.wsgi import WSGIServer # For better concurrent request handling
 import json
 import os
 import random
 
 app = Flask(__name__)
 CORS(app)
+http_server = WSGIServer(('', 5000), app)
+
 
 # Tell NCBI who you are
 Entrez.email = "mimani.s@husky.neu.edu"
@@ -63,4 +66,4 @@ def search_protein():
 
 
 if __name__ == '__main__':
-    app.run()
+    http_server.serve_forever()

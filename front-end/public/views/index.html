@@ -11,12 +11,13 @@
       <label for="dna">DNA Sequence</label>
 
       <textarea id="dna"
-                ng-model="model.dna"
+                ng-model="dna"
                 rows="5"
                 class="form-control"
-                placeholder="Enter DNA sequence here" capitalize>DNA sequence</textarea>
+                placeholder="Enter DNA sequence here"
+                capitalize>DNA sequence</textarea>
 
-        <a ng-click="model.searchDNA()"
+        <a ng-click="model.searchDNA(dna)"
            class="btn btn-block btn-info">Search</a>
 
 
@@ -27,7 +28,7 @@
       <div class="output-console"  id="output-console-current"></div>
 
 
-        Previous Executions:<button style="margin-left: 10px" class="btn btn-sm" id="clearPrev" ng-click="model.clearHistory()">Clear</button>
+        Previous Executions:
         <div class="output-console" ng-bind-html="model.prev" id="output-console-prev"></div>
     </div>
   </div>
