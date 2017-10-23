@@ -95,7 +95,9 @@
             document.getElementById("output-console-current").innerHTML = "";
         }
 
-
+        /*
+        Function to generate a new html paragraph element
+         */
         function generateHTMLElement(id, dna) {
             let para = document.createElement("p");
             para.setAttribute('class', id);

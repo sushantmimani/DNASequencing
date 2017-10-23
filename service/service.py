@@ -23,10 +23,28 @@ protein_list = ['NC_000852', 'NC_007346', 'NC_008724', 'NC_009899', 'NC_014637',
                 'NC_023640', 'NC_023719', 'NC_027867']
 
 
-# Shuffle the list for random searches
+#######################################################################################################################
+# shuffle_protein : list --> list
+# GIVEN : a list of ACCESSION ids
+# RETURNS : a shuffled list of ACCESSION ids
+# Example
+
+# shuffle_protein(['NC_000852','NC_023719','NC_008724']) --> ['NC_023719','NC_008724','NC_000852']
+#######################################################################################################################
+
 def shuffle_protein():
     random.shuffle(protein_list)
 
+
+#######################################################################################################################
+# find_protein : String --> JSON
+# GIVEN : a String which represent a DNA sequence
+# RETURNS : A JSON object with keys protein and organism
+
+# Example:
+
+# find_protein('AAAAAA') -->    {"organism":"Acanthamoeba polyphaga moumouvirus","list":"NC_020104"}
+#######################################################################################################################
 
 def find_protein(dna):
     shuffle_protein()
@@ -54,6 +72,12 @@ def find_protein(dna):
                 response["organism"] = "Unavailable"
             f.close()
     return response
+
+#######################################################################################################################
+# search_protein
+# GIVEN : Request
+# RETURNS : Response
+#######################################################################################################################
 
 
 @app.route('/', methods=['POST'])
