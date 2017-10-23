@@ -45,7 +45,7 @@ def find_protein(dna):
             seq = "".join(data.split('\n')[1:])  # Extract the sequence from file
             header = data.split('\n')[0].split(" ")
             organism = " ".join(header[1:header.__len__() - 2]).replace(",", "")  # Extract the organism name
-            if dna in seq:
+            if dna in seq: # If sequence match is found
                 response["list"] = protein
                 response["organism"] = organism
                 break
