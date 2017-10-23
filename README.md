@@ -1,6 +1,6 @@
 # DNASequencing
 
-- To start service: ./run.bash
+- To start service: ./run.bash  (in the root folder)
 
 - REST service port: 5000
 
